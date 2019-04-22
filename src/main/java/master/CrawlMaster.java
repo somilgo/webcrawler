@@ -180,6 +180,7 @@ public class CrawlMaster {
 			}
 			try {
 				while (SEND_COUNT.get() > 500) {
+					log.info("Pausing to let workers catch up");
 					Thread.sleep(1000);
 				}
 				if (url == null) Thread.sleep(100);

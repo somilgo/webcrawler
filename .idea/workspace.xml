@@ -2,48 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f04ab236-dd63-487d-bc3e-6ded28d5d2f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/robots/00000000.jdb" beforeDir="false" afterPath="$PROJECT_DIR$/robots/00000000.jdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/robots/00000001.jdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/ContentHashDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/ContentHashDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cis455crawler-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/cis455crawler-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/ContentHashDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/ContentHashDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/DocumentDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/DocumentDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/RedirectDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/RedirectDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/CrawlMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/CrawlMaster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/KeyComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/KeyComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/RobotsStorage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/RobotsStorage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/RobotsStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/RobotsStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/RobotsTxtInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/RobotsTxtInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/StorageLayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/StorageLayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/URLStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/URLStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/www/GetURLsHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/www/GetURLsHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/www/StatusPageHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/www/StatusPageHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/www/WorkerUpdateHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/www/WorkerUpdateHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/LocalCluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/LocalCluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/bolt/DocumentFetcherBolt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/bolt/DocumentFetcherBolt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/bolt/DocumentProcessorBolt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/bolt/DocumentProcessorBolt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/bolt/OutputCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/bolt/OutputCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/distributed/WorkerHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/distributed/WorkerHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/routers/FieldBased.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/routers/FieldBased.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/routers/IStreamRouter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/routers/IStreamRouter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/spout/SpoutOutputCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/spout/SpoutOutputCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/tasks/BoltTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/tasks/BoltTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/tasks/SpoutTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/tasks/SpoutTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/tuple/Fields.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/tuple/Fields.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/tuple/Tuple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/tuple/Tuple.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/tuple/Values.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/tuple/Values.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worker/CrawlWorker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worker/CrawlWorker$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worker/CrawlWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worker/CrawlWorker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worker/URLInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worker/URLInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urls/00000000.jdb" beforeDir="false" afterPath="$PROJECT_DIR$/urls/00000000.jdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urls/00000001.jdb" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -55,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="81" column="44" selection-start-line="81" selection-start-column="44" selection-end-line="81" selection-end-column="44" />
+            <state relative-caret-position="235">
+              <caret line="182" column="64" selection-start-line="182" selection-start-column="64" selection-end-line="182" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="270" column="18" selection-start-line="270" selection-start-column="12" selection-end-line="270" selection-end-column="18" />
+            <state relative-caret-position="-1185">
+              <caret line="205" column="45" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="39" column="62" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
+            <state relative-caret-position="235">
+              <caret line="188" column="28" selection-start-line="188" selection-start-column="19" selection-end-line="188" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -177,6 +136,8 @@
       <find>sendurl</find>
       <find>downl</find>
       <find>return</find>
+      <find>master_ip</find>
+      <find>not modified</find>
     </findStrings>
     <replaceStrings>
       <replace>stormlite</replace>
@@ -219,8 +180,8 @@
         <option value="$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/ContentHashDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" />
         <option value="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" />
       </list>
     </option>
   </component>
@@ -335,7 +296,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555913503768" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555915967277" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -488,12 +449,12 @@
       <workItem from="1555807741555" duration="282000" />
       <workItem from="1555808037200" duration="99000" />
       <workItem from="1555808177556" duration="18154000" />
-      <workItem from="1555892571352" duration="20257000" />
+      <workItem from="1555892571352" duration="21785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46315000" />
+    <option name="totallyTimeSpent" value="47843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -800,16 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="81" column="44" selection-start-line="81" selection-start-column="44" selection-end-line="81" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -830,20 +781,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="270" column="18" selection-start-line="270" selection-start-column="12" selection-end-line="270" selection-end-column="18" />
+        <state relative-caret-position="235">
+          <caret line="188" column="28" selection-start-line="188" selection-start-column="19" selection-end-line="188" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="39" column="62" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
+        <state relative-caret-position="-1185">
+          <caret line="205" column="45" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="182" column="64" selection-start-line="182" selection-start-column="64" selection-end-line="182" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
