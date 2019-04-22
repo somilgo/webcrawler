@@ -229,12 +229,14 @@ public class CrawlMaster {
 		}
 		new File(URL_STORE_ENV).mkdir();
 		urls = new URLStore(URL_STORE_ENV, "URLSTORE", 1000);
-		urls.push("http://reddit.com");
-		urls.push("http://nytimes.com");
-		urls.push("http://cnn.com");
-		urls.push("http://digg.com");
-		//urls.push("http://stackoverflow.com");
-		urls.push("https://en.wikipedia.org/wiki/Adolf_Hitler");
+		urls.push("http://reddit.com/r/science");
+		urls.push("https://www.reddit.com/r/popular");
+		urls.push("https://moz.com/top500");
+//		urls.push("http://nytimes.com");
+//		urls.push("http://cnn.com");
+//		urls.push("http://digg.com");
+//		//urls.push("http://stackoverflow.com");
+//		urls.push("https://en.wikipedia.org/wiki/Adolf_Hitler");
 		outputURLs();
 
 		System.out.println("Press [Enter] to shut down the master...");
