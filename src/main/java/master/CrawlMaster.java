@@ -39,6 +39,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -48,7 +51,7 @@ import master.www.StatusPageHandler;
 public class CrawlMaster {
 
 	public static int mqport = 7999;
-	static Logger log = LogManager.getLogger(CrawlMaster.class);
+	public static Logger log = LogManager.getLogger(CrawlMaster.class);
 	static final long serialVersionUID = 455555001;
 	public static final int myPort = 8000;
 	private static final String URL_SPOUT = "URL_SPOUT";
@@ -65,6 +68,7 @@ public class CrawlMaster {
 	public static final HashMap<String, String> workerJobs = new HashMap<String, String>();
 	public static final HashMap<String, String> workerLastCrawled = new HashMap<String, String>();
 	public static URLStore urls;
+	public static LinkedBlockingQueue<String> urlCache = new LinkedBlockingQueue<>();
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 
@@ -74,7 +78,7 @@ public class CrawlMaster {
 	}
 	private static void registerGetURLs() { post("/geturls", new GetURLsHandler()); }
 	private static void registerURLEndpoint() {
-		get("/urlendpoint", new URLEndpoint());
+		System.out.println("HERE"); get("/urlendpoint", new URLEndpoint());
 	}
 	private static void registerShutdown() {
 		get("/shutdown", (req, resp) -> {
@@ -205,6 +209,13 @@ public class CrawlMaster {
 
 	private static void outputURLs() {
 		while (true) {
+			while (urlCache.size() > 500) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			String url = null;
 			try {
 				url = urls.poll();
@@ -212,7 +223,7 @@ public class CrawlMaster {
 				e.printStackTrace();
 			}
 			if (url != null && ROBOTS.isOKtoCrawl(url)) {
-				outputURL(url);
+				urlCache.add(url);
 			}
 			try {
 //				while (SEND_COUNT.get() > 500) {
@@ -248,11 +259,10 @@ public class CrawlMaster {
 		registerShutdown();
 		registerGetURLs();
 		registerURLEndpoint();
-		initMQ();
-		System.out.println("Press [Enter] to initialize workers...");
-		(new BufferedReader(new InputStreamReader(System.in))).readLine();
-
-		startJob();
+		//initMQ();
+//		System.out.println("Press [Enter] to initialize workers...");
+//		(new BufferedReader(new InputStreamReader(System.in))).readLine();
+//
 
 		System.out.println("Press [Enter] to start crawl...");
 		(new BufferedReader(new InputStreamReader(System.in))).readLine();
@@ -280,7 +290,10 @@ public class CrawlMaster {
 //		urls.push("http://digg.com");
 //		//urls.push("http://stackoverflow.com");
 //		urls.push("https://en.wikipedia.org/wiki/Adolf_Hitler");
+		startJob();
 		outputURLs();
+
+
 
 		System.out.println("Press [Enter] to shut down the master...");
 		(new BufferedReader(new InputStreamReader(System.in))).readLine();

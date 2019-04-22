@@ -1,6 +1,7 @@
 package stormlite.spout;
 
 import com.rabbitmq.client.DeliverCallback;
+import db.DocumentDB;
 import master.CrawlMaster;
 import stormlite.OutputFieldsDeclarer;
 import stormlite.TopologyContext;
@@ -15,6 +16,11 @@ import org.apache.logging.log4j.Logger;
 import worker.CrawlWorker;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
@@ -52,12 +58,33 @@ public class URLSpout implements IRichSpout {
 
     @Override
     public void nextTuple() {
-        boolean autoAck = true; // acknowledgment is covered below
+//        boolean autoAck = true; // acknowledgment is covered below
+//        try {
+//            CrawlWorker.channel.basicConsume(CrawlMaster.URL_Q, autoAck, deliverCallback, consumerTag -> { });
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        URL url = null;
         try {
-            CrawlWorker.channel.basicConsume(CrawlMaster.URL_Q, autoAck, deliverCallback, consumerTag -> { });
+            url = new URL(CrawlWorker.MASTER_IP + "/urlendpoint");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.getResponseCode();
+            InputStream is = conn.getInputStream();
+            String urlout = DocumentDB.convertStreamToString(is);
+            if (urlout.length() > 0) {
+                System.out.println("got url : " + urlout);
+                dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(urlout))));
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     @Override
