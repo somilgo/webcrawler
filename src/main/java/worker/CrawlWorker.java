@@ -119,6 +119,8 @@ public class CrawlWorker {
 
 	private static void subMQ() {
 		ConnectionFactory factory = new ConnectionFactory();
+		factory.setUsername("guest");
+		factory.setPassword("guest");
 		factory.setHost(MASTER_IP_MQ);
 		try {
 			connection = factory.newConnection();
