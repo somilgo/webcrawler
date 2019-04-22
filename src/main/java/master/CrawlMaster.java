@@ -97,10 +97,10 @@ public class CrawlMaster {
 		TopologyBuilder builder = new TopologyBuilder();
 
 			// Only one source ("spout") for the words
-			builder.setSpout(URL_SPOUT, spout, 1);
+			builder.setSpout(URL_SPOUT, spout, 20);
 
 		// Parallel mappers, each of which gets specific words
-		builder.setBolt(DOC_FETCH_BOLT, fetcher, 25).shuffleGrouping(URL_SPOUT);
+		builder.setBolt(DOC_FETCH_BOLT, fetcher, 1).shuffleGrouping(URL_SPOUT);
 
 		Topology topo = builder.createTopology();
 
