@@ -38,8 +38,8 @@ import spark.Spark;
 public class CrawlWorker {
 	public static final double MAX_DOC_SIZE = 2 * 1e6;
 	static Logger log = LogManager.getLogger(CrawlWorker.class);
-	//public static final String MASTER_URL = "http://ec2-3-82-233-78.compute-1.amazonaws.com";
-	public static final String MASTER_URL = "http://localhost";
+	public static final String MASTER_URL = "http://ec2-3-82-233-78.compute-1.amazonaws.com";
+	//public static final String MASTER_URL = "http://localhost";
 	public static final String MASTER_IP =  MASTER_URL + ":" + CrawlMaster.myPort;
 	public static final String MASTER_IP_MQ = "ec2-3-82-233-78.compute-1.amazonaws.com";
 	public static final String USER_AGENT = "cis455crawler";
