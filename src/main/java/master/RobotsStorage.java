@@ -42,8 +42,9 @@ public class RobotsStorage {
         RobotsTxtInfo robotsInfo = new RobotsTxtInfo();
         robotsInfo.setURL(u.getHostName());
         try{
-            logger.debug(url + ": attempting to fetch robots.txt");
+            logger.info(url + ": attempting to fetch robots.txt");
             InputStreamReader isr = new InputStreamReader(new URL(url).openStream());
+            logger.info("fetched robots.txt success");
             BufferedReader in = new BufferedReader(isr);
             String line = null;
             String currentAgent = null;

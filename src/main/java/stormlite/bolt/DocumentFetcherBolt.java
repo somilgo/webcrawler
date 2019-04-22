@@ -32,6 +32,8 @@ public class DocumentFetcherBolt implements IRichBolt {
     static Logger logger = LogManager.getLogger(DocumentFetcherBolt.class);
     String executorId = UUID.randomUUID().toString();
     private OutputCollector collector;
+    private static final DocumentProcessorBolt dpb = new DocumentProcessorBolt();
+    HashSet<String> redirects;
 
     @Override
     public void cleanup() {}
@@ -39,9 +41,10 @@ public class DocumentFetcherBolt implements IRichBolt {
     @Override
     public void execute(Tuple input) {
         String url = (String) input.getValues().get(0);
-        logger.debug("Received url: " + url);
+        logger.info("Received url: " + url);
+        this.redirects = new HashSet<String>();
         crawlUrl(url);
-        logger.debug("Crawled url: " + url);
+        logger.info("Crawled url: " + url);
     }
 
     @Override
@@ -79,7 +82,7 @@ public class DocumentFetcherBolt implements IRichBolt {
 //        boolean firstSleep = true;
 //        while (master.getRobotsStorage().deferCrawl(url)){
 //            Thread.sleep(1000);
-//            if (firstSleep) logger.debug(url + ": deferring crawl");
+//            if (firstSleep) logger.info(url + ": deferring crawl");
 //            firstSleep = false;
 //        }
 
@@ -89,7 +92,7 @@ public class DocumentFetcherBolt implements IRichBolt {
         con.setRequestProperty("User-Agent", CrawlWorker.USER_AGENT);
         if (accessTime != null) {
             con.setRequestProperty("If-Modified-Since", accessTime);
-            logger.debug(url + ": already in the DB");
+            logger.info(url + ": already in the DB");
         }
         Map<String, List<String>> respMap = con.getHeaderFields();
         Map<String, List<String>> outMap = new HashMap<String, List<String>>();
@@ -117,7 +120,7 @@ public class DocumentFetcherBolt implements IRichBolt {
 //        boolean firstSleep = true;
 //        while (master.getRobotsStorage().deferCrawl(url)) {
 //            Thread.sleep(1000);
-//            if (firstSleep) logger.debug(url + ": deferring crawl");
+//            if (firstSleep) logger.info(url + ": deferring crawl");
 //            firstSleep = false;
 //        }
 
@@ -184,11 +187,11 @@ public class DocumentFetcherBolt implements IRichBolt {
             try {
                 respHeaders = getResponseHeaders(url, accessTime);
             } catch (SocketTimeoutException e) {
-                logger.debug(url + ": response timed out, ditching url.");
+                logger.info(url + ": response timed out, ditching url.");
                 CrawlWorker.sendURLs(new LinkedList<>(), url);
                 return;
             } catch (Exception e) {
-                logger.debug(url + ": error trying to connect to url - discarding");
+                logger.info(url + ": error trying to connect to url - discarding");
                 CrawlWorker.sendURLs(new LinkedList<>(), url);
                 return;
             }
@@ -196,7 +199,7 @@ public class DocumentFetcherBolt implements IRichBolt {
         String newUrl = respHeaders.get("new-urls").get(0);
 
         if (!newUrl.equals(url)) {
-			RedirectDB.addRedirectURL(url, newUrl);
+			//RedirectDB.addRedirectURL(url, newUrl);
             url = newUrl;
         }
 
@@ -211,18 +214,26 @@ public class DocumentFetcherBolt implements IRichBolt {
                         redirectLink.startsWith("https://")) {
                     LinkedList<String> redirectUrlSend = new LinkedList<String>();
                     redirectUrlSend.add(redirectLink);
-                    CrawlWorker.sendURLs(redirectUrlSend, url);
-                    RedirectDB.addRedirectURL(url, redirectLink);
-                    logger.debug(url + ": redirected - will crawl redirection link");
+                    //CrawlWorker.sendURLs(redirectUrlSend, url);
+                    //RedirectDB.addRedirectURL(url, redirectLink);
+                    logger.info(url + ": redirected - will crawl redirection link: " + redirectLink);
+                    if (!url.equals(redirectLink) && !redirects.contains(url)) {
+                        redirects.add(url);
+                        crawlUrl(redirectLink);
+                    }
                     return;
                 }
                 else {
                     String baseURI = createBaseURI(url);
                     LinkedList<String> redirectUrlSend = new LinkedList<String>();
                     redirectUrlSend.add(baseURI + redirectLink);
-                    CrawlWorker.sendURLs(redirectUrlSend, url);
-                    RedirectDB.addRedirectURL(url, baseURI+redirectLink);
-                    logger.debug(url + ": redirected - will crawl redirection link");
+                    //CrawlWorker.sendURLs(redirectUrlSend, url);
+                    //RedirectDB.addRedirectURL(url, baseURI+redirectLink);
+                    logger.info(url + ": redirected - will crawl redirection link");
+                    if (!url.equals(redirectLink) && !redirects.contains(url)) {
+                        redirects.add(url);
+                        crawlUrl(baseURI + redirectLink);
+                    }
                     return;
                 }
 
@@ -243,7 +254,7 @@ public class DocumentFetcherBolt implements IRichBolt {
             }
 
             if (!validType || !validLength) {
-                logger.debug(url + ": invalid url type or length - skipping");
+                logger.info(url + ": invalid url type or length - skipping");
                 CrawlWorker.sendURLs(new LinkedList<>(), url);
                 return;
             }
@@ -252,29 +263,30 @@ public class DocumentFetcherBolt implements IRichBolt {
                     content = getResponseContent(url);
                     logger.info(url + ": Downloading");
                 } catch (SocketTimeoutException e) {
-                    logger.debug(url + ": response timed out, ditching url.");
+                    logger.info(url + ": response timed out, ditching url.");
                     CrawlWorker.sendURLs(new LinkedList<>(), url);
                     return;
                 } catch (Exception e) {
-                    logger.debug(url + ": error trying to connect to url - discarding");
+                    logger.info(url + ": error trying to connect to url - discarding");
                     CrawlWorker.sendURLs(new LinkedList<>(), url);
                     return;
                 }
         } else {
-            logger.debug(url + ": bad response code - skipping");
+            logger.info(url + ": bad response code - skipping");
             CrawlWorker.sendURLs(new LinkedList<>(), url);
             return;
         }
         if (ContentHashDB.contains(content)) {
-            logger.debug(url + ": already seen this content - skipping");
+            logger.info(url + ": already seen this content - skipping");
             CrawlWorker.sendURLs(new LinkedList<>(), url);
             return;
         } else {
             String contentType;
             if (respHeaders.get("Content-Type") == null) contentType = null;
             else contentType = respHeaders.get("Content-Type").get(0);
-            logger.debug("DFB emitting document: " + url);
-            collector.emit(new Values<Object>(url, responseCode, contentType, content));
+            logger.info("DFB emitting document: " + url);
+            dpb.execute(new Tuple(this.getSchema(), (new Values<Object>(url, responseCode, contentType, content))));
+            //collector.emit(new Values<Object>(url, responseCode, contentType, content));
         }
 
     }

@@ -1,11 +1,17 @@
 package master;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.ConfirmListener;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import db.ContentHashDB;
 import db.DocumentDB;
 import db.RedirectDB;
 import master.www.GetURLsHandler;
+import master.www.URLEndpoint;
 import master.www.WorkerUpdateHandler;
 import stormlite.Config;
 import stormlite.Topology;
@@ -33,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static spark.Spark.*;
@@ -40,15 +47,19 @@ import master.www.StatusPageHandler;
 
 public class CrawlMaster {
 
+	public static int mqport = 7999;
 	static Logger log = LogManager.getLogger(CrawlMaster.class);
 	static final long serialVersionUID = 455555001;
 	public static final int myPort = 8000;
 	private static final String URL_SPOUT = "URL_SPOUT";
 	private static final String DOC_FETCH_BOLT = "DOC_FETCH_BOLT";
 	private static final String DOC_PROC_BOLT = "DOC_PROC_BOLT";
+	public static final String URL_Q = "somilsurls";
 	private static final String URL_STORE_ENV = "urls";
 	private static final String ROBOT_STORE_ENV = "robots";
 	public static RobotsStorage ROBOTS;
+	public static Channel channel;
+	public static Connection connection;
 	public static final List<String> workers = new LinkedList<String>();
 	public static final HashMap<String, String> workerStatuses = new HashMap<String, String>();
 	public static final HashMap<String, String> workerJobs = new HashMap<String, String>();
@@ -62,6 +73,9 @@ public class CrawlMaster {
 		post("/update", new WorkerUpdateHandler());
 	}
 	private static void registerGetURLs() { post("/geturls", new GetURLsHandler()); }
+	private static void registerURLEndpoint() {
+		get("/urlendpoint", new URLEndpoint());
+	}
 	private static void registerShutdown() {
 		get("/shutdown", (req, resp) -> {
 			shutdown();
@@ -78,14 +92,11 @@ public class CrawlMaster {
 
 		TopologyBuilder builder = new TopologyBuilder();
 
-		// Only one source ("spout") for the words
-		builder.setSpout(URL_SPOUT, spout, 1);
+			// Only one source ("spout") for the words
+			builder.setSpout(URL_SPOUT, spout, 1);
 
 		// Parallel mappers, each of which gets specific words
-		builder.setBolt(DOC_FETCH_BOLT, fetcher, 15).shuffleGrouping(URL_SPOUT);
-
-		// Parallel reducers, each of which gets specific words
-		builder.setBolt(DOC_PROC_BOLT, processor, 15).shuffleGrouping(DOC_FETCH_BOLT);
+		builder.setBolt(DOC_FETCH_BOLT, fetcher, 25).shuffleGrouping(URL_SPOUT);
 
 		Topology topo = builder.createTopology();
 
@@ -147,7 +158,7 @@ public class CrawlMaster {
 			byte[] toSend = parameters.getBytes();
 			os.write(toSend);
 			os.flush();
-			conn.getResponseCode();
+			System.out.println(conn.getResponseCode());
 		} else
 			conn.getResponseCode();
 
@@ -166,6 +177,32 @@ public class CrawlMaster {
 		}
 	}
 
+	public static void outputURL(String url) {
+		try {
+			channel.basicPublish("", URL_Q, null, url.getBytes("UTF-8"));
+			System.out.println(" [x] Sent '" + url + "'");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void initMQ() {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("localhost");
+		try {
+			connection = factory.newConnection();
+			channel = connection.createChannel();
+			channel.queueDeclare(URL_Q, false, false, false, null);
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 	private static void outputURLs() {
 		while (true) {
 			String url = null;
@@ -175,15 +212,19 @@ public class CrawlMaster {
 				e.printStackTrace();
 			}
 			if (url != null && ROBOTS.isOKtoCrawl(url)) {
-				sendURL(url);
-				SEND_COUNT.getAndIncrement();
+				outputURL(url);
 			}
 			try {
-				while (SEND_COUNT.get() > 500) {
-					log.info("Pausing to let workers catch up");
-					Thread.sleep(1000);
+//				while (SEND_COUNT.get() > 500) {
+//					log.info("Pausing to let workers catch up");
+//					Thread.sleep(1000);
+//				}
+				if (url == null) {
+					System.out.println("null url sleeping...");
+					Thread.sleep(100);
+				} else {
+					Thread.sleep(100);
 				}
-				if (url == null) Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -206,7 +247,8 @@ public class CrawlMaster {
 		registerStatusPage();
 		registerShutdown();
 		registerGetURLs();
-
+		registerURLEndpoint();
+		initMQ();
 		System.out.println("Press [Enter] to initialize workers...");
 		(new BufferedReader(new InputStreamReader(System.in))).readLine();
 
@@ -217,9 +259,10 @@ public class CrawlMaster {
 
 		Path p = Paths.get(ROBOT_STORE_ENV);
 		if (Files.exists(p)) {
-			deleteFolder(new File(ROBOT_STORE_ENV));
+			//deleteFolder(new File(ROBOT_STORE_ENV));
+		} else {
+			new File(ROBOT_STORE_ENV).mkdir();
 		}
-		new File(ROBOT_STORE_ENV).mkdir();
 		ROBOTS = new RobotsStorage();
 		ROBOTS.init(ROBOT_STORE_ENV);
 
@@ -244,6 +287,8 @@ public class CrawlMaster {
 
 		CrawlMaster.shutdown();
 	}
+
+
 
 	public static void deleteFolder(File folder) {
 		File[] files = folder.listFiles();

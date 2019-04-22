@@ -1,6 +1,7 @@
 stormlite/distributed/WorkerHelper.class
 stormlite/bolt/IRichBolt.class
 stormlite/distributed/StringIntPairKeyDeserializer.class
+master/www/URLEndpoint.class
 stormlite/tasks/SpoutTask.class
 stormlite/TopologyBuilder.class
 stormlite/routers/FieldBased.class
@@ -19,6 +20,7 @@ stormlite/OutputFieldsDeclarer.class
 stormlite/tuple/Fields.class
 stormlite/bolt/DocumentProcessorBolt.class
 stormlite/Topology.class
+worker/CrawlWorker$2.class
 master/RobotsStorage.class
 stormlite/spout/SpoutOutputCollector.class
 db/RedirectDB.class

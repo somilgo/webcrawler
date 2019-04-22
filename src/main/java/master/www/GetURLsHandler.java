@@ -11,7 +11,6 @@ public class GetURLsHandler implements Route {
 	public Object handle(Request request, Response response) throws Exception {
 		String urlBody = request.body();
 		String crawledUrl = request.queryParams("crawled");
-		CrawlMaster.ROBOTS.receiveCrawl(crawledUrl);
 		CrawlMaster.SEND_COUNT.getAndDecrement();
 		String port = request.queryParams("port");
 

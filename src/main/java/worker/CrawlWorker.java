@@ -7,8 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.rabbitmq.client.*;
 import db.ContentHashDB;
 import db.DocumentDB;
 import db.RedirectDB;
@@ -36,10 +38,13 @@ import spark.Spark;
 public class CrawlWorker {
 	public static final double MAX_DOC_SIZE = 2 * 1e6;
 	static Logger log = LogManager.getLogger(CrawlWorker.class);
-	public static final String MASTER_URL = "http://ec2-18-205-190-36.compute-1.amazonaws.com";
+	public static final String MASTER_URL = "http://localhost";
 	public static final String MASTER_IP =  MASTER_URL + ":" + CrawlMaster.myPort;
+	public static final String MASTER_IP_MQ = "localhost";
 	public static final String USER_AGENT = "cis455crawler";
 	public static String port;
+	public static Channel channel;
+	public static Connection connection;
 
 	static LocalCluster cluster = new LocalCluster();
 
@@ -112,6 +117,26 @@ public class CrawlWorker {
 		return out;
 	}
 
+	private static void subMQ() {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost(MASTER_IP_MQ);
+		try {
+			connection = factory.newConnection();
+			channel = connection.createChannel();
+			channel.queueDeclare(CrawlMaster.URL_Q, false, false, false, null);
+			channel.addShutdownListener(new ShutdownListener() {
+				@Override
+				public void shutdownCompleted(ShutdownSignalException e) {
+					System.out.println(e);
+				}
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 
 	/**
@@ -131,7 +156,7 @@ public class CrawlWorker {
 		port = args[0];
 
 		System.out.println("Worker node startup, on port " + myPort);
-
+		subMQ();
 		CrawlWorker worker = new CrawlWorker(myPort);
 		get("/shutdown", (req, resp) ->{
 			CrawlWorker.shutdown();
@@ -224,7 +249,7 @@ public class CrawlWorker {
 		try {
 			URL url = new URL(MASTER_IP + "/geturls?crawled=" + curr + "&port=" + port);
 
-			log.info("Sending request to " + url.toString());
+			log.info("Sending request to " + url.toString() + " with number urls: " + urls.size());
 
 			conn = (HttpURLConnection)url.openConnection();
 			conn.setDoOutput(true);

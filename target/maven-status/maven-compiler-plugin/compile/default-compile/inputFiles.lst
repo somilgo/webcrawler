@@ -31,6 +31,7 @@
 /home/somil/Documents/CIS555/crawler/src/main/java/stormlite/bolt/BoltDeclarer.java
 /home/somil/Documents/CIS555/crawler/src/main/java/stormlite/tasks/ITask.java
 /home/somil/Documents/CIS555/crawler/src/main/java/master/CrawlMaster.java
+/home/somil/Documents/CIS555/crawler/src/main/java/master/www/URLEndpoint.java
 /home/somil/Documents/CIS555/crawler/src/main/java/master/www/WorkerUpdateHandler.java
 /home/somil/Documents/CIS555/crawler/src/main/java/worker/RunJobRoute.java
 /home/somil/Documents/CIS555/crawler/src/main/java/stormlite/routers/IStreamRouter.java

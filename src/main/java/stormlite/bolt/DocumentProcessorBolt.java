@@ -33,7 +33,7 @@ public class DocumentProcessorBolt implements IRichBolt {
 
         List<Object> values = input.getValues();
         String url = (String) values.get(0);
-        logger.debug("Received doc: " + url);
+        logger.info("Received doc for parsing: " + url);
         String responseCode = (String) values.get(1);
         String contentType = (String) values.get(2);
         String document = (String) values.get(3);
