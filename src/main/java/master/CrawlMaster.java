@@ -32,6 +32,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static spark.Spark.*;
 import master.www.StatusPageHandler;
@@ -52,6 +54,8 @@ public class CrawlMaster {
 	public static final HashMap<String, String> workerJobs = new HashMap<String, String>();
 	public static final HashMap<String, String> workerLastCrawled = new HashMap<String, String>();
 	public static URLStore urls;
+	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
+	private static Random rand = new Random();
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -75,13 +79,13 @@ public class CrawlMaster {
 		TopologyBuilder builder = new TopologyBuilder();
 
 		// Only one source ("spout") for the words
-		builder.setSpout(URL_SPOUT, spout, 5);
+		builder.setSpout(URL_SPOUT, spout, 1);
 
 		// Parallel mappers, each of which gets specific words
-		builder.setBolt(DOC_FETCH_BOLT, fetcher, 25).shuffleGrouping(URL_SPOUT);
+		builder.setBolt(DOC_FETCH_BOLT, fetcher, 15).shuffleGrouping(URL_SPOUT);
 
 		// Parallel reducers, each of which gets specific words
-		builder.setBolt(DOC_PROC_BOLT, processor, 25).shuffleGrouping(DOC_FETCH_BOLT);
+		builder.setBolt(DOC_PROC_BOLT, processor, 15).shuffleGrouping(DOC_FETCH_BOLT);
 
 		Topology topo = builder.createTopology();
 
@@ -151,7 +155,8 @@ public class CrawlMaster {
 	}
 
 	public static void sendURL(String url) {
-		String dest = workers.get(0);
+		int workerIndex = rand.nextInt(workers.size());
+		String dest = workers.get(workerIndex);
 		String path = "newurl?url=" + url;
 		String params = "";
 		try {
@@ -169,8 +174,14 @@ public class CrawlMaster {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if (url != null && ROBOTS.isOKtoCrawl(url)) sendURL(url);
+			if (url != null && ROBOTS.isOKtoCrawl(url)) {
+				sendURL(url);
+				SEND_COUNT.getAndIncrement();
+			}
 			try {
+				while (SEND_COUNT.get() > 500) {
+					Thread.sleep(1000);
+				}
 				if (url == null) Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

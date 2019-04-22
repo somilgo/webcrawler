@@ -12,6 +12,7 @@ public class GetURLsHandler implements Route {
 		String urlBody = request.body();
 		String crawledUrl = request.queryParams("crawled");
 		CrawlMaster.ROBOTS.receiveCrawl(crawledUrl);
+		CrawlMaster.SEND_COUNT.getAndDecrement();
 		String port = request.queryParams("port");
 
 		String ip = request.ip();
