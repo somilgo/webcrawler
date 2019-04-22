@@ -189,7 +189,7 @@ public class CrawlMaster {
 
 	public static void initMQ() {
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("localhost");
+		factory.setHost("0.0.0.0");
 		try {
 			connection = factory.newConnection();
 			channel = connection.createChannel();

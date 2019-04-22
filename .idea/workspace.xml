@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f04ab236-dd63-487d-bc3e-6ded28d5d2f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="225" column="32" selection-start-line="225" selection-start-column="32" selection-end-line="225" selection-end-column="32" />
+            <state relative-caret-position="235">
+              <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
@@ -105,7 +105,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>@Override</find>
       <find>env</find>
       <find>robots</find>
       <find>currCrawling</find>
@@ -135,6 +134,7 @@
       <find>sendJob</find>
       <find>initMq</find>
       <find>submq</find>
+      <find>host</find>
     </findStrings>
     <replaceStrings>
       <replace>stormlite</replace>
@@ -183,8 +183,8 @@
         <option value="$PROJECT_DIR$/src/main/java/master/www/URLEndpoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/spout/URLSpout.java" />
-        <option value="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" />
         <option value="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" />
       </list>
     </option>
   </component>
@@ -299,7 +299,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555961847910" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555962173902" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -452,12 +452,12 @@
       <workItem from="1555807741555" duration="282000" />
       <workItem from="1555808037200" duration="99000" />
       <workItem from="1555808177556" duration="18154000" />
-      <workItem from="1555892571352" duration="37529000" />
+      <workItem from="1555892571352" duration="37854000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63587000" />
+    <option name="totallyTimeSpent" value="63912000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -826,16 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="225" column="32" selection-start-line="225" selection-start-column="32" selection-end-line="225" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -844,6 +834,16 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3722#3723#0" expanded="true" />
             <element signature="e#3756#3757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
