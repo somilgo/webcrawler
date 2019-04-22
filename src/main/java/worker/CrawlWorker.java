@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
@@ -23,11 +24,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import stormlite.LocalCluster;
 import stormlite.TopologyContext;
+import stormlite.bolt.DocumentFetcherBolt;
 import stormlite.distributed.WorkerHelper;
 import stormlite.distributed.WorkerJob;
 import stormlite.routers.IStreamRouter;
 import stormlite.tuple.Tuple;
 import spark.Spark;
+import stormlite.tuple.Values;
 
 /**
  * Simple listener for worker creation
@@ -37,6 +40,7 @@ import spark.Spark;
  */
 public class CrawlWorker {
 	public static final double MAX_DOC_SIZE = 2 * 1e6;
+	public static boolean working;
 	static Logger log = LogManager.getLogger(CrawlWorker.class);
 	public static final String MASTER_URL = "http://ec2-3-82-233-78.compute-1.amazonaws.com";
 	//public static final String MASTER_URL = "http://localhost";
@@ -192,6 +196,44 @@ public class CrawlWorker {
 
 			}
 		}.start();
+
+		while (!working) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		Spark.stop();
+		DocumentFetcherBolt dfb = new DocumentFetcherBolt();
+		for (int i = 0; i < 20; i++) {
+			new Thread(){
+				public void run(){
+					while(working) {
+						URL url = null;
+						try {
+							url = new URL(CrawlWorker.MASTER_IP + "/urlendpoint");
+							HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+							conn.setRequestMethod("GET");
+							conn.getResponseCode();
+							InputStream is = conn.getInputStream();
+							String urlout = DocumentDB.convertStreamToString(is);
+							if (urlout.length() > 0) {
+								log.info("Got URL! : " + urlout);
+								dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(urlout))));
+							}
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+						} catch (ProtocolException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}.start();
+		}
 
 		System.out.println("Press [Enter] to shut down this worker...");
 

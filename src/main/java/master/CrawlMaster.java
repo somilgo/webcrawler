@@ -282,9 +282,11 @@ public class CrawlMaster {
 		}
 		new File(URL_STORE_ENV).mkdir();
 		urls = new URLStore(URL_STORE_ENV, "URLSTORE", 1000);
-		urls.push("http://reddit.com/r/science");
-		urls.push("https://www.reddit.com/r/popular");
-		urls.push("https://moz.com/top500");
+		urls.push("https://www.reddit.com/r/news");
+		urls.push("https://www.medium.com");
+		urls.push("https://techcrunch.com/");
+		urls.push("https://www.imdb.com/");
+		urls.push("http://digg.com/");
 //		urls.push("http://nytimes.com");
 //		urls.push("http://cnn.com");
 //		urls.push("http://digg.com");

@@ -35,12 +35,12 @@ public class URLSpout implements IRichSpout {
     private final String executorId = UUID.randomUUID().toString();
     SpoutOutputCollector collector;
 
-    DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-        String message = new String(delivery.getBody(), "UTF-8");
-        dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(message))));
-        System.out.println(" [x] Received '" + message + "'");
-        collector.emit(new Values<Object>(message));
-    };
+//    DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+//        String message = new String(delivery.getBody(), "UTF-8");
+//        dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(message))));
+//        System.out.println(" [x] Received '" + message + "'");
+//        collector.emit(new Values<Object>(message));
+//    };
 
     @Override
     public void open(Map<String, String> config, TopologyContext topo, SpoutOutputCollector collector) {

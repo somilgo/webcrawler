@@ -17,9 +17,12 @@ public class RunJobRoute implements Route {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
-		log.info("Starting job!");
-		cluster.startTopology();
+//		log.info("Starting job!");
+//		cluster.startTopology();
+//
+//		return "Started";
 
+		CrawlWorker.working = true;
 		return "Started";
 	}
 
