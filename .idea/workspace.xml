@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f04ab236-dd63-487d-bc3e-6ded28d5d2f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/master/RobotsStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/master/RobotsStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cis455crawler-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/cis455crawler-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/CrawlMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/CrawlMaster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/RobotsStorage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/RobotsStorage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/RobotsStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/RobotsStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/Storage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/StorageLayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/StorageLayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/www/GetURLsHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/www/GetURLsHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/master/www/URLEndpoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/master/www/URLEndpoint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stormlite/spout/URLSpout.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stormlite/spout/URLSpout.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worker/CrawlWorker$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worker/CrawlWorker$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/worker/CrawlWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/worker/CrawlWorker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urls/00000000.jdb" beforeDir="false" afterPath="$PROJECT_DIR$/urls/00000000.jdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,53 +14,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2240">
-              <caret line="291" column="37" selection-start-line="291" selection-start-column="37" selection-end-line="291" selection-end-column="37" />
+            <state relative-caret-position="404">
+              <caret line="289" column="44" selection-start-line="289" selection-start-column="44" selection-end-line="289" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2901#2915#0" expanded="true" />
-                <element signature="e#7627#7976#0" expanded="true" />
-                <element signature="e#7975#7976#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/master/RobotsStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+            <state relative-caret-position="-1871">
+              <caret line="102" column="39" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#829#837#0" expanded="true" />
-                <element signature="e#914#915#0" expanded="true" />
-                <element signature="e#964#965#0" expanded="true" />
+                <element signature="e#813#814#0" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/ContentHashDB.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentProcessorBolt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+            <state relative-caret-position="-568">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,16 +55,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/spout/URLSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="746">
-              <caret line="88" column="12" selection-start-line="88" selection-start-column="12" selection-end-line="88" selection-end-column="32" />
+            <state relative-caret-position="162">
+              <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3096#3097#0" expanded="true" />
                 <element signature="e#3147#3148#0" expanded="true" />
-                <element signature="e#3199#3200#0" expanded="true" />
                 <element signature="e#3232#3233#0" expanded="true" />
-                <element signature="e#3298#3299#0" expanded="true" />
                 <element signature="e#3346#3347#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3185">
+              <caret line="281" column="19" selection-start-line="281" selection-start-column="19" selection-end-line="281" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,7 +82,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
+            <state relative-caret-position="405">
               <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -128,10 +106,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
+            <state relative-caret-position="162">
               <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4013#4014#0" expanded="true" />
+                <element signature="e#4047#4048#0" expanded="true" />
+                <element signature="e#5449#6248#0" expanded="true" />
+                <element signature="e#6247#6248#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,7 +122,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/worker/RunJobRoute.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
+            <state relative-caret-position="621">
               <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -152,7 +134,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/db/DocumentDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
+            <state relative-caret-position="377">
               <caret line="83" column="11" selection-start-line="83" selection-start-column="11" selection-end-line="83" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -172,6 +154,14 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>redirectdb</find>
+      <find>worker</find>
+      <find>logger.debug</find>
+      <find>already in the DB</find>
+      <find>crawled url</find>
+      <find>sendurls</find>
+      <find>createbaseuri</find>
+      <find>thread.</find>
       <find>executor</find>
       <find>dfb</find>
       <find>emit</find>
@@ -194,14 +184,6 @@
       <find>collect</find>
       <find>post(</find>
       <find>collector.emit</find>
-      <find>isoktocrawl</find>
-      <find>system.out.println</find>
-      <find>success</find>
-      <find>getRobots</find>
-      <find>sendURL</find>
-      <find>timeout</find>
-      <find>httpurlconnection</find>
-      <find>init</find>
     </findStrings>
     <replaceStrings>
       <replace>stormlite</replace>
@@ -238,20 +220,20 @@
         <option value="$PROJECT_DIR$/src/main/java/master/RobotsTxtInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/RedirectDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/master/www/StatusPageHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/db/ContentHashDB.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j2.yaml" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentProcessorBolt.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java" />
+        <option value="$PROJECT_DIR$/src/main/java/master/RobotsStorage.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/DocumentDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/master/www/URLEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/worker/RunJobRoute.java" />
         <option value="$PROJECT_DIR$/src/main/java/stormlite/spout/URLSpout.java" />
-        <option value="$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/worker/RunJobRoute.java" />
         <option value="$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/db/ContentHashDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/master/CrawlMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/master/RobotsStorage.java" />
       </list>
     </option>
   </component>
@@ -263,10 +245,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="y" value="-1" />
+    <option name="width" value="1920" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -275,7 +256,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -371,13 +351,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556047635767" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../javasparkplayground" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555979825932" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -529,13 +510,12 @@
       <workItem from="1555807741555" duration="282000" />
       <workItem from="1555808037200" duration="99000" />
       <workItem from="1555808177556" duration="18154000" />
-      <workItem from="1555892571352" duration="50234000" />
-      <workItem from="1556029659542" duration="10598000" />
+      <workItem from="1555892571352" duration="45298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86890000" />
+    <option name="totallyTimeSpent" value="71356000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -551,7 +531,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49947917" visible="true" weight="0.050904978" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39932126" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -718,7 +698,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/master/RobotEntity.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/master/RobotEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="14" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/master/RobotsTxtInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
@@ -736,6 +725,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/ContentHashDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/master/www/StatusPageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -746,7 +745,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.log" />
+    <entry file="file://$PROJECT_DIR$/app.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-697">
+          <caret line="276" column="374" selection-start-line="276" selection-start-column="368" selection-end-line="276" selection-end-column="374" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -781,40 +786,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentProcessorBolt.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6723">
-          <caret line="281" column="19" selection-start-line="281" selection-start-column="19" selection-end-line="281" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/worker/RunJobRoute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+        <state relative-caret-position="567">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -823,18 +798,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/DocumentDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
+        <state relative-caret-position="377">
           <caret line="83" column="11" selection-start-line="83" selection-start-column="11" selection-end-line="83" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/master/www/GetURLsHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -851,10 +816,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/ContentHashDB.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/LocalCluster.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+          <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/worker/RunJobRoute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -863,15 +838,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/spout/URLSpout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="746">
-          <caret line="88" column="12" selection-start-line="88" selection-start-column="12" selection-end-line="88" selection-end-column="32" />
+        <state relative-caret-position="162">
+          <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
             <element signature="e#3147#3148#0" expanded="true" />
-            <element signature="e#3199#3200#0" expanded="true" />
             <element signature="e#3232#3233#0" expanded="true" />
-            <element signature="e#3298#3299#0" expanded="true" />
             <element signature="e#3346#3347#0" expanded="true" />
           </folding>
         </state>
@@ -879,36 +851,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/worker/CrawlWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
+        <state relative-caret-position="162">
           <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4013#4014#0" expanded="true" />
+            <element signature="e#4047#4048#0" expanded="true" />
+            <element signature="e#5449#6248#0" expanded="true" />
+            <element signature="e#6247#6248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentFetcherBolt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3185">
+          <caret line="281" column="19" selection-start-line="281" selection-start-column="19" selection-end-line="281" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/stormlite/bolt/DocumentProcessorBolt.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2240">
-          <caret line="291" column="37" selection-start-line="291" selection-start-column="37" selection-end-line="291" selection-end-column="37" />
+        <state relative-caret-position="-568">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2901#2915#0" expanded="true" />
-            <element signature="e#7627#7976#0" expanded="true" />
-            <element signature="e#7975#7976#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/master/RobotsStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+        <state relative-caret-position="-1871">
+          <caret line="102" column="39" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#829#837#0" expanded="true" />
-            <element signature="e#914#915#0" expanded="true" />
-            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#813#814#0" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/master/CrawlMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="289" column="44" selection-start-line="289" selection-start-column="44" selection-end-line="289" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
