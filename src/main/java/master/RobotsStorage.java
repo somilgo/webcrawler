@@ -223,12 +223,12 @@ class Storage {
         return sl;
     }
 
-    public RobotsTxtInfo get(String url) {
+    public synchronized RobotsTxtInfo get(String url) {
         RobotsTxtInfo c = sl.robotByUrl.get(url);
         return c;
     }
 
-    public void put(RobotsTxtInfo rti) {
+    public synchronized void put(RobotsTxtInfo rti) {
         sl.robotByUrl.put(rti);
     }
 
