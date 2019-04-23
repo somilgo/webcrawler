@@ -228,8 +228,12 @@ public class CrawlMaster {
 				Thread t = new Thread(){
 					public void run(){
 						urlThreadCount.getAndIncrement();
-						if (ROBOTS.isOKtoCrawl(threadurl)) {
-							urlCache.add(threadurl);
+						try{
+							if (ROBOTS.isOKtoCrawl(threadurl)) {
+								urlCache.add(threadurl);
+							}
+						} catch (Exception e) {
+
 						}
 						urlThreadCount.getAndDecrement();
 					}

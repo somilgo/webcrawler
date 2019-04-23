@@ -166,33 +166,33 @@ public class RobotsStorage {
         if (url.getHostName() == null) return false;
         RobotsTxtInfo robot = getRobots(url);
         String agent = "*";
-        synchronized(robot) {
-            if (robot.containsUserAgent(USER_AGENT)) agent = USER_AGENT;
+        if (robot.containsUserAgent(USER_AGENT)) agent = USER_AGENT;
 
-            String allowRule = "";
-            //Check allowed links - we give allowed links precedence
-            List<String> allowedLinks = robot.getAllowedLinks(agent);
-            if (allowedLinks != null) {
-                for (String link : allowedLinks) {
-                    if (url.getFilePath().startsWith(link)) {
-                        if (link.length() > allowRule.length()) allowRule = link;
-                    }
+        String allowRule = "";
+        //Check allowed links - we give allowed links precedence
+        List<String> allowedLinks = robot.getAllowedLinks(agent);
+        if (allowedLinks != null) {
+            for (String link : allowedLinks) {
+                if (url.getFilePath().startsWith(link)) {
+                    if (link.length() > allowRule.length()) allowRule = link;
                 }
             }
+        }
 
-            String disallowRule = "";
-            //Check disallowed links
-            List<String> disallowedLinks = robot.getDisallowedLinks(agent);
-            if (disallowedLinks != null) {
-                for (String link : disallowedLinks) {
-                    if (url.getFilePath().startsWith(link)) {
-                        if (link.length() > disallowRule.length()) disallowRule = link;
-                    }
+        String disallowRule = "";
+        //Check disallowed links
+        List<String> disallowedLinks = robot.getDisallowedLinks(agent);
+        if (disallowedLinks != null) {
+            for (String link : disallowedLinks) {
+                if (url.getFilePath().startsWith(link)) {
+                    if (link.length() > disallowRule.length()) disallowRule = link;
                 }
             }
-            if (disallowRule.length() != 0 || allowRule.length() < disallowRule.length()) {
-                return false;
-            } else {
+        }
+        if (disallowRule.length() != 0 || allowRule.length() < disallowRule.length()) {
+            return false;
+        } else {
+            synchronized (robot) {
                 if (robot.currCrawling && nonZeroCrawlDelay(robot)) {
                     robot.addToCrawl(site);
                     robotsStore.put(robot);
