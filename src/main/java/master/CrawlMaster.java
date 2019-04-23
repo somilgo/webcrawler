@@ -218,11 +218,13 @@ public class CrawlMaster {
 				}
 				long currTime = System.currentTimeMillis();
 				synchronized (urlThreads) {
-					for (Map.Entry<Thread, Long> threadEntry : urlThreads.entrySet()) {
+					Iterator<Map.Entry<Thread, Long>> iter = urlThreads.entrySet().iterator();
+					while (iter.hasNext()) {
+						Map.Entry<Thread, Long> threadEntry = iter.next();
 						long time = threadEntry.getValue().longValue();
 						if (currTime - time > 5000) {
 							threadEntry.getKey().stop();
-							urlThreads.remove(threadEntry.getKey());
+							iter.remove();
 						}
 					}
 				}
