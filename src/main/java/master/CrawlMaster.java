@@ -297,18 +297,18 @@ public class CrawlMaster {
 			new File(URL_STORE_ENV).mkdir();
 		}
 		urls = new URLStore(URL_STORE_ENV, "URLSTORE", 1000);
-//		urls.push("http://digg.com/");
-//		urls.push("https://techcrunch.com/");
-//		urls.push("https://www.reddit.com");
-//		urls.push("https://www.google.com");
-//		urls.push("https://www.reddit.com/r/news");
-//		urls.push("https://www.medium.com");
+		urls.push("http://digg.com/");
+		urls.push("https://techcrunch.com/");
+		urls.push("https://www.reddit.com");
+		urls.push("https://www.google.com");
+		urls.push("https://www.reddit.com/r/news");
+		urls.push("https://www.medium.com");
 
 
-//		urls.push("https://www.imdb.com/");
-//		urls.push("https://moz.com/top500");
-//		urls.push("http://nytimes.com");
-//		urls.push("http://cnn.com");
+		urls.push("https://www.imdb.com/");
+		urls.push("https://moz.com/top500");
+		urls.push("http://nytimes.com");
+		urls.push("http://cnn.com");
 //		urls.push("http://digg.com");
 //		//urls.push("http://stackoverflow.com");
 //		urls.push("https://en.wikipedia.org/wiki/Adolf_Hitler");
