@@ -216,19 +216,6 @@ public class CrawlMaster {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				long currTime = System.currentTimeMillis();
-				synchronized (urlThreads) {
-					Iterator<Map.Entry<Thread, Long>> iter = urlThreads.entrySet().iterator();
-					while (iter.hasNext()) {
-						Map.Entry<Thread, Long> threadEntry = iter.next();
-						long time = threadEntry.getValue().longValue();
-						if (currTime - time > 5000) {
-							threadEntry.getKey().stop();
-							iter.remove();
-						}
-					}
-				}
-
 			}
 			String url = null;
 			try {
@@ -240,15 +227,9 @@ public class CrawlMaster {
 				final String threadurl = url;
 				Thread t = new Thread(){
 					public void run(){
-						synchronized(urlThreads) {
-							urlThreads.put(this, new Long(System.currentTimeMillis()));
-						}
 						urlThreadCount.getAndIncrement();
 						if (ROBOTS.isOKtoCrawl(threadurl)) {
 							urlCache.add(threadurl);
-						}
-						synchronized (urlThreads) {
-							urlThreads.remove(this);
 						}
 						urlThreadCount.getAndDecrement();
 					}

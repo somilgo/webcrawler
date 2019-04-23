@@ -215,6 +215,8 @@ class Storage {
     public Storage (String envHomeString) {
         this.envHomeString = envHomeString;
         sl = setup();
+        close();
+        sl = setup();
     }
 
     private StorageLayer setup() {
