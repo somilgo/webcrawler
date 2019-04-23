@@ -287,6 +287,7 @@ public class CrawlMaster {
 		urls.push("https://techcrunch.com/");
 		urls.push("https://www.imdb.com/");
 		urls.push("http://digg.com/");
+		urls.push("https://moz.com/top500");
 //		urls.push("http://nytimes.com");
 //		urls.push("http://cnn.com");
 //		urls.push("http://digg.com");
