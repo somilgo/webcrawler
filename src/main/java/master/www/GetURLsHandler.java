@@ -11,13 +11,12 @@ public class GetURLsHandler implements Route {
 	public Object handle(Request request, Response response) throws Exception {
 		String urlBody = request.body();
 		String crawledUrl = request.queryParams("crawled");
-		CrawlMaster.SEND_COUNT.getAndDecrement();
 		String port = request.queryParams("port");
 
 		String ip = request.ip();
 		ip = "http://" + ip + ":" + port;
 
-		CrawlMaster.workerLastCrawled.put(ip, crawledUrl);
+		CrawlMaster.ROBOTS.receiveCrawl(crawledUrl);
 		if (urlBody == null) return "";
 		String[] urls = urlBody.split(",");
 		if (urls == null) return "";

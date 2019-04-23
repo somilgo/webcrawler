@@ -68,7 +68,7 @@ public class CrawlMaster {
 	public static final HashMap<String, String> workerJobs = new HashMap<String, String>();
 	public static final HashMap<String, String> workerLastCrawled = new HashMap<String, String>();
 	public static URLStore urls;
-	public static LinkedBlockingQueue<String> urlCache = new LinkedBlockingQueue<>();
+	public static LinkedBlockingDeque<String> urlCache = new LinkedBlockingDeque<>();
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
@@ -211,6 +211,8 @@ public class CrawlMaster {
 	private static void outputURLs() {
 		while (true) {
 			while (urlCache.size() > 500 || urlThreadCount.get() > 20) {
+				log.info("Sleeping because urlCache size=" + urlCache.size()
+						+ " and thread count = " + urlThreadCount.get());
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -297,18 +299,21 @@ public class CrawlMaster {
 			new File(URL_STORE_ENV).mkdir();
 		}
 		urls = new URLStore(URL_STORE_ENV, "URLSTORE", 1000);
-		urls.push("http://digg.com/");
-		urls.push("https://techcrunch.com/");
-		urls.push("https://www.reddit.com");
-		urls.push("https://www.google.com");
-		urls.push("https://www.reddit.com/r/news");
-		urls.push("https://www.medium.com");
+		urls.push("https://dbappserv.cis.upenn.edu/crawltest/nytimes/");
+		urls.push("https://dbappserv.cis.upenn.edu/crawltest/bbc/");
+		urls.push("http://niharpatil.me");
+//		urls.push("http://digg.com/");
+//		urls.push("https://techcrunch.com/");
+//		urls.push("https://www.reddit.com");
+//		urls.push("https://www.google.com");
+//		urls.push("https://www.reddit.com/r/news");
+//		urls.push("https://www.medium.com");
 
 
-		urls.push("https://www.imdb.com/");
-		urls.push("https://moz.com/top500");
-		urls.push("http://nytimes.com");
-		urls.push("http://cnn.com");
+//		urls.push("https://www.imdb.com/");
+//		urls.push("https://moz.com/top500");
+//		urls.push("http://nytimes.com");
+//		urls.push("http://cnn.com");
 //		urls.push("http://digg.com");
 //		//urls.push("http://stackoverflow.com");
 //		urls.push("https://en.wikipedia.org/wiki/Adolf_Hitler");

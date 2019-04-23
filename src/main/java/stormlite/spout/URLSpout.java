@@ -73,14 +73,19 @@ public class URLSpout implements IRichSpout {
             InputStream is = conn.getInputStream();
             String urlout = DocumentDB.convertStreamToString(is);
             if (urlout.length() > 0) {
-                System.out.println("got url : " + urlout);
+                logger.info("Grabbed URL from Master! - " + urlout);
                 dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(urlout))));
+            } else {
+                logger.info("Master did not give a URL");
+                Thread.sleep(1000);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

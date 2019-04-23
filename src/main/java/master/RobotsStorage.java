@@ -12,6 +12,7 @@ import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -23,13 +24,23 @@ public class RobotsStorage {
     public static Logger logger = LogManager.getLogger(RobotsStorage.class);
     public static final String USER_AGENT = "cis455crawler";
     private Storage robotsStore;
+    private HashSet<String> currFetching = new HashSet<String>();
 
     public void init(String roboEnv) {
         robotsStore = new Storage(roboEnv);
     }
 
     private RobotsTxtInfo getRobots(URLInfo u) {
+        while (currFetching.contains(u.getHostName())) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        currFetching.add(u.getHostName());
         if (robotsStore.get(u.getHostName()) != null) {
+            currFetching.remove(u.getHostName());
             return robotsStore.get(u.getHostName());
         }
 
@@ -43,7 +54,12 @@ public class RobotsStorage {
         robotsInfo.setURL(u.getHostName());
         try{
             logger.info(url + ": attempting to fetch robots.txt");
-            InputStreamReader isr = new InputStreamReader(new URL(url).openStream());
+            URL robotUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) robotUrl.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5000);
+
+            InputStreamReader isr = new InputStreamReader(conn.getInputStream());
             logger.info("fetched robots.txt success");
             BufferedReader in = new BufferedReader(isr);
             String line = null;
@@ -75,7 +91,9 @@ public class RobotsStorage {
             robotsInfo = new RobotsTxtInfo(); //Putting RTI placeholder so we don't try this again
             robotsInfo.setURL(u.getHostName());
         }
+
         robotsStore.put(robotsInfo);
+        currFetching.remove(u.getHostName());
         return robotsInfo;
     }
 
@@ -100,7 +118,7 @@ public class RobotsStorage {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    CrawlMaster.sendURL(threadurl);
+                    CrawlMaster.urlCache.addFirst(threadurl);
                 }
             }.start();
         }
