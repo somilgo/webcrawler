@@ -28,7 +28,7 @@ import javax.xml.bind.DatatypeConverter;
 public class ContentHashDB {
 
 	static AmazonDynamoDB dynamoDB;
-	public static final String tableName = "content_seen2";
+	public static final String tableName = "content_seen";
 
 	public static void init() throws Exception {
 		/*
