@@ -28,7 +28,7 @@ public class RobotsStorage {
         robotsStore = new Storage(roboEnv);
     }
 
-    private synchronized RobotsTxtInfo getRobots(URLInfo u) {
+    private RobotsTxtInfo getRobots(URLInfo u) {
         if (robotsStore.get(u.getHostName()) != null) {
             return robotsStore.get(u.getHostName());
         }

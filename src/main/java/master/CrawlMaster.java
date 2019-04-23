@@ -59,7 +59,7 @@ public class CrawlMaster {
 	private static final String DOC_PROC_BOLT = "DOC_PROC_BOLT";
 	public static final String URL_Q = "somilsurls";
 	private static final String URL_STORE_ENV = "urls";
-	private static final String ROBOT_STORE_ENV = "robots";
+	private static final String ROBOT_STORE_ENV = "test_robots";
 	public static RobotsStorage ROBOTS;
 	public static Channel channel;
 	public static Connection connection;
@@ -71,6 +71,7 @@ public class CrawlMaster {
 	public static LinkedBlockingQueue<String> urlCache = new LinkedBlockingQueue<>();
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
+	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -209,7 +210,7 @@ public class CrawlMaster {
 
 	private static void outputURLs() {
 		while (true) {
-			while (urlCache.size() > 500) {
+			while (urlCache.size() > 500 || urlThreadCount.get() > 20) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -222,9 +223,20 @@ public class CrawlMaster {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if (url != null && ROBOTS.isOKtoCrawl(url)) {
-				urlCache.add(url);
+			if (url != null) {
+				final String threadurl = url;
+				new Thread(){
+					public void run(){
+					urlThreadCount.getAndIncrement();
+					if (ROBOTS.isOKtoCrawl(threadurl)) {
+						urlCache.add(threadurl);
+					}
+					urlThreadCount.getAndDecrement();
+					}
+				}.start();
 			}
+
+
 			try {
 //				while (SEND_COUNT.get() > 500) {
 //					log.info("Pausing to let workers catch up");
@@ -232,9 +244,9 @@ public class CrawlMaster {
 //				}
 				if (url == null) {
 					System.out.println("null url sleeping...");
-					Thread.sleep(100);
+					Thread.sleep(1000);
 				} else {
-					Thread.sleep(100);
+					//Thread.sleep(100);
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -259,6 +271,7 @@ public class CrawlMaster {
 		registerShutdown();
 		registerGetURLs();
 		registerURLEndpoint();
+		//threadPool(20, 2, 2500);
 		//initMQ();
 //		System.out.println("Press [Enter] to initialize workers...");
 //		(new BufferedReader(new InputStreamReader(System.in))).readLine();
@@ -278,16 +291,22 @@ public class CrawlMaster {
 
 		p = Paths.get(URL_STORE_ENV);
 		if (Files.exists(p)) {
-			deleteFolder(new File(URL_STORE_ENV));
+//			deleteFolder(new File(URL_STORE_ENV));
+//			new File(URL_STORE_ENV).mkdir();
+		} else {
+			new File(URL_STORE_ENV).mkdir();
 		}
-		new File(URL_STORE_ENV).mkdir();
 		urls = new URLStore(URL_STORE_ENV, "URLSTORE", 1000);
-		urls.push("https://www.reddit.com/r/news");
-		urls.push("https://www.medium.com");
-		urls.push("https://techcrunch.com/");
-		urls.push("https://www.imdb.com/");
-		urls.push("http://digg.com/");
-		urls.push("https://moz.com/top500");
+//		urls.push("http://digg.com/");
+//		urls.push("https://techcrunch.com/");
+//		urls.push("https://www.reddit.com");
+//		urls.push("https://www.google.com");
+//		urls.push("https://www.reddit.com/r/news");
+//		urls.push("https://www.medium.com");
+
+
+//		urls.push("https://www.imdb.com/");
+//		urls.push("https://moz.com/top500");
 //		urls.push("http://nytimes.com");
 //		urls.push("http://cnn.com");
 //		urls.push("http://digg.com");
