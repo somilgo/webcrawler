@@ -217,13 +217,16 @@ public class CrawlMaster {
 					e.printStackTrace();
 				}
 				long currTime = System.currentTimeMillis();
-				for (Map.Entry<Thread, Long> threadEntry : urlThreads.entrySet()) {
-					long time = threadEntry.getValue().longValue();
-					if (currTime - time > 5000) {
-						threadEntry.getKey().stop();
-						urlThreads.remove(threadEntry.getKey());
+				synchronized (urlThreads) {
+					for (Map.Entry<Thread, Long> threadEntry : urlThreads.entrySet()) {
+						long time = threadEntry.getValue().longValue();
+						if (currTime - time > 5000) {
+							threadEntry.getKey().stop();
+							urlThreads.remove(threadEntry.getKey());
+						}
 					}
 				}
+
 			}
 			String url = null;
 			try {
@@ -235,12 +238,16 @@ public class CrawlMaster {
 				final String threadurl = url;
 				Thread t = new Thread(){
 					public void run(){
-						urlThreads.put(this, new Long(System.currentTimeMillis()));
+						synchronized(urlThreads) {
+							urlThreads.put(this, new Long(System.currentTimeMillis()));
+						}
 						urlThreadCount.getAndIncrement();
 						if (ROBOTS.isOKtoCrawl(threadurl)) {
 							urlCache.add(threadurl);
 						}
-						urlThreads.remove(this);
+						synchronized (urlThreads) {
+							urlThreads.remove(this);
+						}
 						urlThreadCount.getAndDecrement();
 					}
 				};
