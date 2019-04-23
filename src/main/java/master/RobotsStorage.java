@@ -259,7 +259,6 @@ class StorageLayer {
             robotStoreConfig.setAllowCreate(true);
             robotStoreConfig.setTransactional(true);
 
-
             // Open the environment and entity store
             File envHome = new File(envHomeString);
             storageEnv = new Environment(envHome, storageEnvConfig);

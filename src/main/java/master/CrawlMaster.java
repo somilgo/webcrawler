@@ -35,10 +35,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -72,6 +69,7 @@ public class CrawlMaster {
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
+	private static final HashMap<Thread, Long> urlThreads = new HashMap<Thread, Long>();
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -218,6 +216,14 @@ public class CrawlMaster {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				long currTime = System.currentTimeMillis();
+				for (Map.Entry<Thread, Long> threadEntry : urlThreads.entrySet()) {
+					long time = threadEntry.getValue().longValue();
+					if (currTime - time > 5000) {
+						threadEntry.getKey().stop();
+						urlThreads.remove(threadEntry.getKey());
+					}
+				}
 			}
 			String url = null;
 			try {
@@ -227,15 +233,19 @@ public class CrawlMaster {
 			}
 			if (url != null) {
 				final String threadurl = url;
-				new Thread(){
+				Thread t = new Thread(){
 					public void run(){
-					urlThreadCount.getAndIncrement();
-					if (ROBOTS.isOKtoCrawl(threadurl)) {
-						urlCache.add(threadurl);
+						urlThreads.put(this, new Long(System.currentTimeMillis()));
+						urlThreadCount.getAndIncrement();
+						if (ROBOTS.isOKtoCrawl(threadurl)) {
+							urlCache.add(threadurl);
+						}
+						urlThreads.remove(this);
+						urlThreadCount.getAndDecrement();
 					}
-					urlThreadCount.getAndDecrement();
-					}
-				}.start();
+				};
+
+				t.start();
 			}
 
 
