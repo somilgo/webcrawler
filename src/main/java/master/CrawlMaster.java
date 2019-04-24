@@ -306,18 +306,19 @@ public class CrawlMaster {
 //		urls.push("https://dbappserv.cis.upenn.edu/crawltest/nytimes/");
 //		urls.push("https://dbappserv.cis.upenn.edu/crawltest/bbc/");
 //		urls.push("http://niharpatil.me");
-		urls.push("http://www.ebizmba.com/articles/news-websites");
-		urls.push("http://digg.com/");
-		urls.push("https://www.dtelepathy.com/blog/inspiration/14-beautiful-content-heavy-websites-for-inspiration");
-		urls.push("https://techcrunch.com/");
-		urls.push("https://www.reddit.com");
+		urls.push("https://www.techmeme.com/");
+//		urls.push("http://www.ebizmba.com/articles/news-websites");
+//		urls.push("http://digg.com/");
+//		urls.push("https://www.dtelepathy.com/blog/inspiration/14-beautiful-content-heavy-websites-for-inspiration");
+//		urls.push("https://techcrunch.com/");
+//		urls.push("https://www.reddit.com");
 //		urls.push("https://www.google.com");
 //		urls.push("https://www.reddit.com/r/news");
 //		urls.push("https://www.medium.com");
 
 
-//		urls.push("https://www.imdb.com/");
-		urls.push("https://moz.com/top500");
+////		urls.push("https://www.imdb.com/");
+//		urls.push("https://moz.com/top500");
 
 //		urls.push("http://digg.com");
 //		//urls.push("http://stackoverflow.com");

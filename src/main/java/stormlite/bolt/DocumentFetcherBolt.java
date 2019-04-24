@@ -174,6 +174,12 @@ public class DocumentFetcherBolt implements IRichBolt {
     }
 
     private void crawlUrl(String url) {
+
+        if (ContentHashDB.contains(url) || ContentHashDB.contains(new URLInfo(url).getHostName())) {
+            CrawlWorker.sendURLs(new LinkedList<>(), url);
+            return;
+        }
+
         DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date accessDate = DocumentDB.getDocumentTime(url);
@@ -265,20 +271,24 @@ public class DocumentFetcherBolt implements IRichBolt {
                 } catch (SocketTimeoutException e) {
                     logger.info(url + ": response timed out, ditching url.");
                     CrawlWorker.sendURLs(new LinkedList<>(), url);
+                    ContentHashDB.addHash(new URLInfo(url).getHostName());
                     return;
                 } catch (Exception e) {
                     logger.info(url + ": error trying to connect to url - discarding");
                     CrawlWorker.sendURLs(new LinkedList<>(), url);
+                    ContentHashDB.addHash(url);
                     return;
                 }
         } else {
             logger.info(url + ": bad response code - skipping");
+            ContentHashDB.addHash(new URLInfo(url).getHostName());
             CrawlWorker.sendURLs(new LinkedList<>(), url);
             return;
         }
         if (ContentHashDB.contains(content)) {
             logger.info(url + ": already seen this content - skipping");
             CrawlWorker.sendURLs(new LinkedList<>(), url);
+            ContentHashDB.addHash(url);
             return;
         } else {
             String contentType;
