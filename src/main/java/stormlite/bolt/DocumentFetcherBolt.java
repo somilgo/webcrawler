@@ -222,7 +222,6 @@ public class DocumentFetcherBolt implements IRichBolt {
             content = DocumentDB.getDocumentContent(url);
             logger.info(url + ": Not Modified");
         } else if (responseCode.startsWith("3")) {
-        } else if (responseCode.startsWith("3")) {
             if (respHeaders.get("Location") != null) {
                 String redirectLink = respHeaders.get("Location").get(0);
                 if (redirectLink.startsWith("http://") ||
