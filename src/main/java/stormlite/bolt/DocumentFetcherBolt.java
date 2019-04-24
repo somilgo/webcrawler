@@ -212,7 +212,8 @@ public class DocumentFetcherBolt implements IRichBolt {
         String newUrl = respHeaders.get("new-urls").get(0);
 
         if (!newUrl.equals(url)) {
-			//RedirectDB.addRedirectURL(url, newUrl);
+            if (!new URLInfo(newUrl).getHostName().equals(new URLInfo(url).getHostName()))
+			    RedirectDB.addRedirectURL(url, newUrl);
             url = newUrl;
         }
 
@@ -221,6 +222,7 @@ public class DocumentFetcherBolt implements IRichBolt {
             content = DocumentDB.getDocumentContent(url);
             logger.info(url + ": Not Modified");
         } else if (responseCode.startsWith("3")) {
+        } else if (responseCode.startsWith("3")) {
             if (respHeaders.get("Location") != null) {
                 String redirectLink = respHeaders.get("Location").get(0);
                 if (redirectLink.startsWith("http://") ||
@@ -228,7 +230,8 @@ public class DocumentFetcherBolt implements IRichBolt {
                     LinkedList<String> redirectUrlSend = new LinkedList<String>();
                     redirectUrlSend.add(redirectLink);
                     //CrawlWorker.sendURLs(redirectUrlSend, url);
-                    //RedirectDB.addRedirectURL(url, redirectLink);
+                    if (!new URLInfo(redirectLink).getHostName().equals(new URLInfo(url).getHostName()))
+                        RedirectDB.addRedirectURL(url, redirectLink);
                     logger.info(url + ": redirected - will crawl redirection link: " + redirectLink);
                     if (!url.equals(redirectLink) && !redirects.contains(url)) {
                         redirects.add(url);
@@ -241,7 +244,8 @@ public class DocumentFetcherBolt implements IRichBolt {
                     LinkedList<String> redirectUrlSend = new LinkedList<String>();
                     redirectUrlSend.add(baseURI + redirectLink);
                     //CrawlWorker.sendURLs(redirectUrlSend, url);
-                    //RedirectDB.addRedirectURL(url, baseURI+redirectLink);
+                    if (!new URLInfo(baseURI + redirectLink).getHostName().equals(new URLInfo(url).getHostName()))
+                        RedirectDB.addRedirectURL(url, baseURI+redirectLink);
                     logger.info(url + ": redirected - will crawl redirection link");
                     if (!url.equals(redirectLink) && !redirects.contains(url)) {
                         redirects.add(url);
