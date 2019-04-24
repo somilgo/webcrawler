@@ -233,7 +233,7 @@ public class CrawlMaster {
 								urlCache.add(threadurl);
 							}
 						} catch (Exception e) {
-
+							e.printStackTrace();
 						}
 						urlThreadCount.getAndDecrement();
 					}
