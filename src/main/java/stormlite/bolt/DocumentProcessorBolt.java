@@ -82,8 +82,7 @@ public class DocumentProcessorBolt implements IRichBolt {
         Elements links = doc.select("a[href]");
         for (Element link : links) {
             String newlink = link.absUrl("href");
-            if (!urls.contains(newlink) && !ContentHashDB.contains(newlink)) {
-                ContentHashDB.addHash(newlink);
+            if (!urls.contains(newlink)) {
                 urls.add(newlink);
             }
 
