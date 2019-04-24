@@ -306,8 +306,10 @@ public class CrawlMaster {
 //		urls.push("https://dbappserv.cis.upenn.edu/crawltest/nytimes/");
 //		urls.push("https://dbappserv.cis.upenn.edu/crawltest/bbc/");
 //		urls.push("http://niharpatil.me");
-		urls.push("https://www.techmeme.com/");
-		urls.push("http://dmoz-odp.org/");
+//		urls.push("https://www.techmeme.com/");
+//		urls.push("http://dmoz-odp.org/");
+		urls.push("http://dmozlive.com/");
+		urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
 //		urls.push("https://www.dtelepathy.com/blog/inspiration/14-beautiful-content-heavy-websites-for-inspiration");
