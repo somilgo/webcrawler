@@ -42,7 +42,7 @@ public class CrawlWorker {
 	public static final double MAX_DOC_SIZE = 2 * 1e6;
 	public static boolean working;
 	static Logger log = LogManager.getLogger(CrawlWorker.class);
-	public static final String MASTER_URL = "http://ec2-54-225-59-102.compute-1.amazonaws.com";
+	public static final String MASTER_URL = "http://ec2-174-129-137-21.compute-1.amazonaws.com";
 	//public static final String MASTER_URL = "http://localhost";
 	public static final String MASTER_IP =  MASTER_URL + ":" + CrawlMaster.myPort;
 	public static final String MASTER_IP_MQ = "ec2-54-225-59-102.compute-1.amazonaws.com";
