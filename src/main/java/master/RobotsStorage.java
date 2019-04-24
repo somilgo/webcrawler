@@ -31,6 +31,7 @@ public class RobotsStorage {
     }
 
     private RobotsTxtInfo getRobots(URLInfo u) {
+        long startLoop = System.currentTimeMillis();
         while (currFetching.contains(u.getHostName())) {
             try {
                 Thread.sleep(10);
@@ -38,10 +39,17 @@ public class RobotsStorage {
                 e.printStackTrace();
             }
         }
+        long endLoop = System.currentTimeMillis();
+        logger.info("Time to wait for robo = " + (endLoop - startLoop));
         currFetching.add(u.getHostName());
-        if (robotsStore.get(u.getHostName()) != null) {
+
+        long startRobo = System.currentTimeMillis();
+        RobotsTxtInfo robo = robotsStore.get(u.getHostName());
+        long endRobo = System.currentTimeMillis();
+        logger.info("Time to get robo = " + (startRobo - endRobo));
+        if (robo != null) {
             currFetching.remove(u.getHostName());
-            return robotsStore.get(u.getHostName());
+            return robo;
         }
 
         String baseURI = u.getHostName();
