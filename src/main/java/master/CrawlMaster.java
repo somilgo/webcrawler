@@ -227,10 +227,18 @@ public class CrawlMaster {
 				final String threadurl = url;
 				Thread t = new Thread(){
 					public void run(){
+
 						urlThreadCount.getAndIncrement();
 						try{
-							if (ROBOTS.isOKtoCrawl(threadurl)) {
+							long robotsTimeStart = System.currentTimeMillis();
+							boolean robotsBool = ROBOTS.isOKtoCrawl(threadurl);
+							long robotsTimeEnd = System.currentTimeMillis();
+							log.info("Thread "  + Thread.currentThread().getName() + "took " + (robotsTimeEnd - robotsTimeStart) + " ms for OKTOCRAWL");
+							if (robotsBool) {
+								long urlCacheStart = System.currentTimeMillis();
 								urlCache.add(threadurl);
+								long urlCacheEnd = System.currentTimeMillis();
+								log.info("Thread "  + Thread.currentThread().getName() + "took " + (urlCacheEnd - urlCacheStart) + " ms for URL CACHE ADD");
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -308,8 +316,8 @@ public class CrawlMaster {
 //		urls.push("http://niharpatil.me");
 //		urls.push("https://www.techmeme.com/");
 //		urls.push("http://dmoz-odp.org/");
-		urls.push("http://dmozlive.com/");
-		urls.push("https://www.reddit.com/r/popular");
+		//urls.push("http://dmozlive.com/");
+		//urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
 //		urls.push("https://www.dtelepathy.com/blog/inspiration/14-beautiful-content-heavy-websites-for-inspiration");
