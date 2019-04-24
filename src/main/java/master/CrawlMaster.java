@@ -230,7 +230,10 @@ public class CrawlMaster {
 				Thread t = new Thread(){
 					public void run(){
 						urlThreadCount.getAndIncrement();
-						urlThreads.add(Thread.currentThread());
+						synchronized (urlThreads) {
+							urlThreads.add(Thread.currentThread());
+						}
+
 						try{
 							boolean robotsBool = ROBOTS.isOKtoCrawl(threadurl);
 							if (robotsBool) {
@@ -239,7 +242,9 @@ public class CrawlMaster {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						urlThreads.add(Thread.currentThread());
+						synchronized (urlThreads) {
+							urlThreads.remove(Thread.currentThread());
+						}
 						urlThreadCount.getAndDecrement();
 					}
 				};
