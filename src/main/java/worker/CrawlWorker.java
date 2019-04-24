@@ -207,7 +207,7 @@ public class CrawlWorker {
 
 		Spark.stop();
 		DocumentFetcherBolt dfb = new DocumentFetcherBolt();
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 20; i++) {
 			new Thread(){
 				public void run(){
 					while(working) {
@@ -222,6 +222,9 @@ public class CrawlWorker {
 							if (urlout.length() > 0) {
 								log.info("Got URL! : " + urlout);
 								dfb.execute(new Tuple(dfb.getSchema(), (new Values<Object>(urlout))));
+							} else {
+								log.info("Master did not give a URL");
+								Thread.sleep(1000);
 							}
 						} catch (MalformedURLException e) {
 							e.printStackTrace();
