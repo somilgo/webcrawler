@@ -178,7 +178,8 @@ public class DocumentFetcherBolt implements IRichBolt {
         if (ContentHashDB.contains(url) || ContentHashDB.contains(new URLInfo(url).getHostName())) {
             CrawlWorker.sendURLs(new LinkedList<>(), url);
             return;
-        }   
+        }
+
         DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date accessDate = DocumentDB.getDocumentTime(url);
