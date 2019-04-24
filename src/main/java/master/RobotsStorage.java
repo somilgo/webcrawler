@@ -172,7 +172,9 @@ public class RobotsStorage {
     public boolean isOKtoCrawl(String site) {
         URLInfo url = new URLInfo(site);
         if (url.getHostName() == null) return false;
+        logger.info("" + Thread.currentThread().getName() + " fetching robots");
         RobotsTxtInfo robot = getRobots(url);
+        logger.info("" + Thread.currentThread().getName() + " DONE getting robots");
         String agent = "*";
         if (robot.containsUserAgent(USER_AGENT)) agent = USER_AGENT;
 

@@ -69,7 +69,7 @@ public class CrawlMaster {
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
-	private static final HashMap<Thread, Long> urlThreads = new HashMap<Thread, Long>();
+	private static final HashSet<Thread> urlThreads = new HashSet<Thread>();
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -208,7 +208,9 @@ public class CrawlMaster {
 
 	private static void outputURLs() {
 		while (true) {
+			int whileCount = 0;
 			while (urlCache.size() > 500 || urlThreadCount.get() > 30) {
+				if (whileCount % 2 == 0) log.info("tHREADS = " + urlThreads);
 				log.info("Sleeping because urlCache size=" + urlCache.size()
 						+ " and thread count = " + urlThreadCount.get());
 				try {
@@ -228,6 +230,7 @@ public class CrawlMaster {
 				Thread t = new Thread(){
 					public void run(){
 						urlThreadCount.getAndIncrement();
+						urlThreads.add(Thread.currentThread());
 						try{
 							boolean robotsBool = ROBOTS.isOKtoCrawl(threadurl);
 							if (robotsBool) {
@@ -236,6 +239,7 @@ public class CrawlMaster {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						urlThreads.add(Thread.currentThread());
 						urlThreadCount.getAndDecrement();
 					}
 				};
