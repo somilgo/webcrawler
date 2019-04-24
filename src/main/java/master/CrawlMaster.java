@@ -69,7 +69,7 @@ public class CrawlMaster {
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
-	private static final HashMap<Thread, Long> urlThreads = new HashMap<Thread, Long>();
+	private static final HashSet<Thread> urlThreads = new HashSet<Thread>();
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -211,6 +211,7 @@ public class CrawlMaster {
 			while (urlCache.size() > 500 || urlThreadCount.get() > 30) {
 				log.info("Sleeping because urlCache size=" + urlCache.size()
 						+ " and thread count = " + urlThreadCount.get());
+				log.info("Current threads: " + urlThreads);
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -227,7 +228,7 @@ public class CrawlMaster {
 				final String threadurl = url;
 				Thread t = new Thread(){
 					public void run(){
-
+						urlThreads.add(Thread.currentThread());
 						urlThreadCount.getAndIncrement();
 						try{
 							long robotsTimeStart = System.currentTimeMillis();
@@ -244,6 +245,7 @@ public class CrawlMaster {
 							e.printStackTrace();
 						}
 						urlThreadCount.getAndDecrement();
+						urlThreads.remove(Thread.currentThread());
 					}
 				};
 
