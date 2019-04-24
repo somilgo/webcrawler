@@ -208,12 +208,15 @@ public class CrawlMaster {
 
 	private static void outputURLs() {
 		while (true) {
-			int whileCount = 0;
-			log.info("LOOP");
 			while (urlCache.size() > 500 || urlThreadCount.get() > 30) {
-				if (whileCount % 2 == 0) log.info("tHREADS = " + urlThreads);
+				synchronized (urlThreads) {
+					log.info("tHREADS = " + urlThreads);
+				}
+
+				synchronized (urlCache) {
 				log.info("Sleeping because urlCache size=" + urlCache.size()
 						+ " and thread count = " + urlThreadCount.get());
+				}
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
