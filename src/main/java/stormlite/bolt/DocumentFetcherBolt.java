@@ -179,7 +179,6 @@ public class DocumentFetcherBolt implements IRichBolt {
             CrawlWorker.sendURLs(new LinkedList<>(), url);
             return;
         }
-
         DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date accessDate = DocumentDB.getDocumentTime(url);
