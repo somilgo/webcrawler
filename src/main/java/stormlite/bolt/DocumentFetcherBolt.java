@@ -34,6 +34,7 @@ public class DocumentFetcherBolt implements IRichBolt {
     private OutputCollector collector;
     private static final DocumentProcessorBolt dpb = new DocumentProcessorBolt();
     HashSet<String> redirects;
+    Date crawlStart = new Date();
 
     @Override
     public void cleanup() {}
@@ -184,7 +185,13 @@ public class DocumentFetcherBolt implements IRichBolt {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date accessDate = DocumentDB.getDocumentTime(url);
         String accessTime = null;
-        if (accessDate != null) accessTime = dateFormat.format(accessDate);
+        if (accessDate != null) {
+            if (crawlStart.compareTo(accessDate) < 0) {
+                CrawlWorker.sendURLs(new LinkedList<>(), url);
+                return;
+            }
+            accessTime = dateFormat.format(accessDate);
+        }
         Map<String, List<String>> respHeaders = null;
 
         URLInfo u = new URLInfo(url);
