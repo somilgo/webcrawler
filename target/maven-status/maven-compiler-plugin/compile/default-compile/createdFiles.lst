@@ -1,6 +1,7 @@
 stormlite/distributed/WorkerHelper.class
 stormlite/bolt/IRichBolt.class
 stormlite/distributed/StringIntPairKeyDeserializer.class
+master/CrawlMaster$1.class
 master/www/URLEndpoint.class
 stormlite/tasks/SpoutTask.class
 stormlite/TopologyBuilder.class
