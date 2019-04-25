@@ -49,8 +49,6 @@ public class RobotsStorage {
             currFetching.add(u.getHostName());
         }
 
-        logger.info("In the cut : " + Thread.currentThread().getName());
-
         RobotsTxtInfo robo = robotsStore.get(u.getHostName());
         if (robo != null) {
             synchronized (currFetching) {
@@ -73,6 +71,7 @@ public class RobotsStorage {
             HttpURLConnection conn = (HttpURLConnection) robotUrl.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
 
             InputStreamReader isr = new InputStreamReader(conn.getInputStream());
             logger.info(Thread.currentThread().getName() + " fetched robots.txt success");
@@ -182,9 +181,7 @@ public class RobotsStorage {
     public boolean isOKtoCrawl(String site) {
         URLInfo url = new URLInfo(site);
         if (url.getHostName() == null) return false;
-        logger.info("" + Thread.currentThread().getName() + " fetching robots");
         RobotsTxtInfo robot = getRobots(url);
-        logger.info("" + Thread.currentThread().getName() + " DONE getting robots");
         String agent = "*";
         if (robot.containsUserAgent(USER_AGENT)) agent = USER_AGENT;
 

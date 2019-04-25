@@ -208,10 +208,11 @@ public class CrawlMaster {
 
 	private static void outputURLs() {
 		while (true) {
-			while (urlCache.size() > 500 || urlThreadCount.get() > 30) {
-				synchronized (urlThreads) {
-					log.info("tHREADS = " + urlThreads);
-				}
+			int cacheSize;
+			synchronized (urlCache) {
+				cacheSize = urlCache.size();
+			}
+			while (cacheSize > 500 || urlThreadCount.get() > 30) {
 
 				synchronized (urlCache) {
 				log.info("Sleeping because urlCache size=" + urlCache.size()
@@ -234,10 +235,6 @@ public class CrawlMaster {
 				Thread t = new Thread(){
 					public void run(){
 						urlThreadCount.getAndIncrement();
-						synchronized (urlThreads) {
-							urlThreads.add(Thread.currentThread());
-						}
-
 						try{
 							boolean robotsBool = ROBOTS.isOKtoCrawl(threadurl);
 							if (robotsBool) {
@@ -245,9 +242,6 @@ public class CrawlMaster {
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
-						}
-						synchronized (urlThreads) {
-							urlThreads.remove(Thread.currentThread());
 						}
 						urlThreadCount.getAndDecrement();
 					}
