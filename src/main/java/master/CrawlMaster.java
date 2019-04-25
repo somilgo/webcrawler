@@ -212,14 +212,14 @@ public class CrawlMaster {
 			synchronized (urlCache) {
 				cacheSize = urlCache.size();
 			}
-			while (cacheSize > 500 || urlThreadCount.get() > 30) {
-
-				synchronized (urlCache) {
-				log.info("Sleeping because urlCache size=" + urlCache.size()
-						+ " and thread count = " + urlThreadCount.get());
-				}
+			int urlThreadCountCurr = urlThreadCount.get();
+			while (cacheSize > 500 ||  urlThreadCountCurr > 30) {
 				try {
 					Thread.sleep(500);
+					synchronized (urlCache) {
+						log.info("Slept because urlCache size=" + cacheSize
+								+ " and thread count = " + urlThreadCountCurr);
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -206,13 +206,14 @@ public class CrawlWorker {
 		}
 
 		Spark.stop();
-		DocumentFetcherBolt dfb = new DocumentFetcherBolt();
-		for (int i = 0; i < 35; i++) {
+
+		for (int i = 0; i < 20; i++) {
 			new Thread(){
 				public void run(){
 					while(working) {
 						URL url = null;
 						try {
+							DocumentFetcherBolt dfb = new DocumentFetcherBolt();
 							url = new URL(CrawlWorker.MASTER_IP + "/urlendpoint");
 							HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 							conn.setRequestMethod("GET");
