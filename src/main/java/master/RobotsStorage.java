@@ -49,6 +49,8 @@ public class RobotsStorage {
             currFetching.add(u.getHostName());
         }
 
+        logger.info("In the cut : " + Thread.currentThread().getName());
+
         RobotsTxtInfo robo = robotsStore.get(u.getHostName());
         if (robo != null) {
             synchronized (currFetching) {
@@ -66,14 +68,14 @@ public class RobotsStorage {
         RobotsTxtInfo robotsInfo = new RobotsTxtInfo();
         robotsInfo.setURL(u.getHostName());
         try{
-            logger.info(url + ": attempting to fetch robots.txt");
+            logger.info(url + ": " + Thread.currentThread().getName() + " attempting to fetch robots.txt");
             URL robotUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) robotUrl.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5000);
 
             InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-            logger.info("fetched robots.txt success");
+            logger.info(Thread.currentThread().getName() + " fetched robots.txt success");
             BufferedReader in = new BufferedReader(isr);
             String line = null;
             String currentAgent = null;
