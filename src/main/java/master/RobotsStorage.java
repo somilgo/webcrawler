@@ -70,8 +70,8 @@ public class RobotsStorage {
             URL robotUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) robotUrl.openConnection();
             conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(2500);
+            conn.setReadTimeout(2500);
 
             InputStreamReader isr = new InputStreamReader(conn.getInputStream());
             logger.info(Thread.currentThread().getName() + " fetched robots.txt success");
