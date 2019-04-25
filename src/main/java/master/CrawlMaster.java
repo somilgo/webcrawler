@@ -321,7 +321,7 @@ public class CrawlMaster {
 //		urls.push("http://niharpatil.me");
 //		urls.push("https://www.techmeme.com/");
 //		urls.push("http://dmoz-odp.org/");
-		//urls.push("http://dmozlive.com/");
+		urls.push("https://moz.com/top500");
 		//urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
