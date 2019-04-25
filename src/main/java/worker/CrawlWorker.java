@@ -207,7 +207,7 @@ public class CrawlWorker {
 
 		Spark.stop();
 		DocumentFetcherBolt dfb = new DocumentFetcherBolt();
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < 15; i++) {
 			new Thread(){
 				public void run(){
 					while(working) {
