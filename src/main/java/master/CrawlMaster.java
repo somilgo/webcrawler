@@ -216,7 +216,7 @@ public class CrawlMaster {
 			int urlThreadCountCurr = urlThreadCount.get();
 			while (cacheSize > 500 ||  urlThreadCountCurr > 49) {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(5000);
 					synchronized (urlCache) {
 						log.info("Slept because urlCache size=" + cacheSize
 								+ " and thread count = " + urlThreadCountCurr);
