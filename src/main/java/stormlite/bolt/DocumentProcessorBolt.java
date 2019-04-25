@@ -25,6 +25,7 @@ public class DocumentProcessorBolt implements IRichBolt {
     static Logger logger = LogManager.getLogger(DocumentFetcherBolt.class);
     String executorId = UUID.randomUUID().toString();
     private OutputCollector collector;
+    private static final double NUM_LINKS = 20.0;
 
     @Override
     public void cleanup() {}
@@ -80,13 +81,17 @@ public class DocumentProcessorBolt implements IRichBolt {
     private static void parseLinks(String content, String url, LinkedList<String> urls) {
         Document doc = Jsoup.parse(content, url);
         Elements links = doc.select("a[href]");
+        double numLinks = links.size() * 1.0;
+        double threshHold = NUM_LINKS / numLinks;
         for (Element link : links) {
             String newlink = link.absUrl("href");
-            if (!urls.contains(newlink) && !ContentHashDB.contains(newlink)) {
-                ContentHashDB.addHash(newlink);
-                urls.add(newlink);
-            }
 
+            if (!urls.contains(newlink) && Math.random() < threshHold){
+                if (!ContentHashDB.contains(newlink)) {
+                    ContentHashDB.addHash(newlink);
+                    urls.add(newlink);
+                }
+            }
         }
     }
 
