@@ -25,7 +25,7 @@ public class DocumentProcessorBolt implements IRichBolt {
     static Logger logger = LogManager.getLogger(DocumentFetcherBolt.class);
     String executorId = UUID.randomUUID().toString();
     private OutputCollector collector;
-    private static final double NUM_LINKS = 20.0;
+    private static final double NUM_LINKS = 60.0;
 
     @Override
     public void cleanup() {}
