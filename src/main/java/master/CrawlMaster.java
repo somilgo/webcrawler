@@ -69,6 +69,7 @@ public class CrawlMaster {
 	public static AtomicInteger SEND_COUNT = new AtomicInteger(0);
 	private static Random rand = new Random();
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
+
 	private static final HashSet<Thread> urlThreads = new HashSet<Thread>();
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }

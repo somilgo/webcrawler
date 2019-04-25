@@ -44,7 +44,7 @@ public class DocumentFetcherBolt implements IRichBolt {
         String url = (String) input.getValues().get(0);
         logger.info("Received url: " + url);
         this.redirects = new HashSet<String>();
-        crawlUrl(url);
+        crawlUrl(url, 0);
         logger.info("Crawled url: " + url);
     }
 
@@ -174,7 +174,7 @@ public class DocumentFetcherBolt implements IRichBolt {
         return baseURI;
     }
 
-    private void crawlUrl(String url) {
+    private void crawlUrl(String url, int n) {
 
 //        if (ContentHashDB.contains(url) || ContentHashDB.contains(new URLInfo(url).getHostName())) {
 //            CrawlWorker.sendURLs(new LinkedList<>(), url);
@@ -232,9 +232,9 @@ public class DocumentFetcherBolt implements IRichBolt {
                     if (!new URLInfo(redirectLink).getHostName().equals(new URLInfo(url).getHostName()))
                         RedirectDB.addRedirectURL(url, redirectLink);
                     logger.info(url + ": redirected - will crawl redirection link: " + redirectLink);
-                    if (!url.equals(redirectLink) && !redirects.contains(url)) {
+                    if (n < 5) {
                         redirects.add(url);
-                        crawlUrl(redirectLink);
+                        crawlUrl(redirectLink, n+1);
                     }
                     return;
                 }
@@ -246,9 +246,9 @@ public class DocumentFetcherBolt implements IRichBolt {
                     if (!new URLInfo(baseURI + redirectLink).getHostName().equals(new URLInfo(url).getHostName()))
                         RedirectDB.addRedirectURL(url, baseURI+redirectLink);
                     logger.info(url + ": redirected - will crawl redirection link");
-                    if (!url.equals(redirectLink) && !redirects.contains(url)) {
+                    if (n < 5) {
                         redirects.add(url);
-                        crawlUrl(baseURI + redirectLink);
+                        crawlUrl(baseURI + redirectLink, n+1);
                     }
                     return;
                 }
