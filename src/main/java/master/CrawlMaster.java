@@ -223,6 +223,10 @@ public class CrawlMaster {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				synchronized (urlCache) {
+					cacheSize = urlCache.size();
+				}
+				urlThreadCountCurr = urlThreadCount.get();
 			}
 			String url = null;
 			try {
