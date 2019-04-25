@@ -31,24 +31,29 @@ public class RobotsStorage {
     }
 
     private RobotsTxtInfo getRobots(URLInfo u) {
-        long startLoop = System.currentTimeMillis();
-        while (currFetching.contains(u.getHostName())) {
+        boolean currFetchingPres = false;
+        synchronized (currFetching) {
+            currFetchingPres = currFetching.contains(u.getHostName());
+        }
+        while (currFetchingPres) {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            synchronized (currFetching) {
+                currFetchingPres = currFetching.contains(u.getHostName());
+            }
         }
-        long endLoop = System.currentTimeMillis();
-        logger.info("Time to wait for robo = " + (endLoop - startLoop));
-        currFetching.add(u.getHostName());
+        synchronized (currFetching) {
+            currFetching.add(u.getHostName());
+        }
 
-        long startRobo = System.currentTimeMillis();
         RobotsTxtInfo robo = robotsStore.get(u.getHostName());
-        long endRobo = System.currentTimeMillis();
-        logger.info("Time to get robo = " + (startRobo - endRobo));
         if (robo != null) {
-            currFetching.remove(u.getHostName());
+            synchronized (currFetching) {
+                currFetching.remove(u.getHostName());
+            }
             return robo;
         }
 
@@ -101,7 +106,10 @@ public class RobotsStorage {
         }
 
         robotsStore.put(robotsInfo);
-        currFetching.remove(u.getHostName());
+        synchronized (currFetching) {
+            currFetching.remove(u.getHostName());
+        }
+
         return robotsInfo;
     }
 
