@@ -71,6 +71,7 @@ public class CrawlMaster {
 	private static AtomicInteger urlThreadCount = new AtomicInteger(0);
 
 	private static final HashSet<Thread> urlThreads = new HashSet<Thread>();
+	private static int MAX_THREADS = 49;
 
 	private static void registerStatusPage() { get("/status", new StatusPageHandler()); }
 	private static void registerWorkerStatusHandler() {
@@ -214,7 +215,8 @@ public class CrawlMaster {
 				cacheSize = urlCache.size();
 			}
 			int urlThreadCountCurr = urlThreadCount.get();
-			while (cacheSize > 500 ||  urlThreadCountCurr > 49) {
+			int repeat_count = 0;
+			while (cacheSize > 500 ||  urlThreadCountCurr > MAX_THREADS) {
 				try {
 					Thread.sleep(100);
 					synchronized (urlCache) {
@@ -228,6 +230,12 @@ public class CrawlMaster {
 					cacheSize = urlCache.size();
 				}
 				urlThreadCountCurr = urlThreadCount.get();
+				if (urlThreadCountCurr > MAX_THREADS) {
+					repeat_count += 1;
+				}
+				if (repeat_count > 3) {
+					MAX_THREADS += 30;
+				}
 			}
 			String url = null;
 			try {
@@ -321,19 +329,8 @@ public class CrawlMaster {
 //		urls.push("http://niharpatil.me");
 //		urls.push("https://www.techmeme.com/");
 //		urls.push("http://dmoz-odp.org/");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
+		urls.push("https://en.wikipedia.org/wiki/Agriculture");
+		urls.push("https://en.wikipedia.org/wiki/Culture");
 		//urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
