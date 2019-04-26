@@ -332,8 +332,7 @@ public class CrawlMaster {
 		urls.push("https://en.wikipedia.org/wiki/Agriculture");
 		urls.push("https://en.wikipedia.org/wiki/Culture");
 		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
-		urls.push("https://moz.com/top500");
+		urls.push("http://news.nettop20.com/");
 		//urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
