@@ -100,7 +100,7 @@ public class RobotsStorage {
                 }
             }
         } catch (Exception e) {
-            logger.debug(u.getHostName() + ": unable to parse robots.txt");
+            logger.info(u.getHostName() + ": unable to parse robots.txt");
             robotsInfo = new RobotsTxtInfo(); //Putting RTI placeholder so we don't try this again
             robotsInfo.setURL(u.getHostName());
         }
