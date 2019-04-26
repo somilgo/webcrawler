@@ -230,7 +230,7 @@ public class CrawlMaster {
 					cacheSize = urlCache.size();
 				}
 				urlThreadCountCurr = urlThreadCount.get();
-				if (urlThreadCountCurr > MAX_THREADS) {
+				if (urlThreadCountCurr > MAX_THREADS && cacheSize < 10) {
 					repeat_count += 1;
 				}
 				if (repeat_count > 3) {
@@ -331,6 +331,9 @@ public class CrawlMaster {
 //		urls.push("http://dmoz-odp.org/");
 		urls.push("https://en.wikipedia.org/wiki/Agriculture");
 		urls.push("https://en.wikipedia.org/wiki/Culture");
+		urls.push("https://moz.com/top500");
+		urls.push("https://moz.com/top500");
+		urls.push("https://moz.com/top500");
 		//urls.push("https://www.reddit.com/r/popular");
 //		urls.push("http://www.ebizmba.com/articles/news-websites");
 //		urls.push("http://digg.com/");
